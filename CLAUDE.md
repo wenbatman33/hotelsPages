@@ -41,6 +41,13 @@
 - 聯盟追蹤 ID 放 `.env`（`TRIPCOM_ALLIANCE_ID`、`TRIPCOM_SID`、`AGODA_CID`、`KLOOK_AID`）；各方案若有聯盟後台產生的連結，直接填 `affiliateUrl` 優先使用
 - 所有聯盟連結加 `rel="sponsored nofollow noopener"`，並在連結旁標示「合作連結」
 
+## 部署與 SEO
+- 部署在 Cloudflare Workers（靜態資源），網址 https://hotelspages.wenbatman33.workers.dev ，push 到 main 自動部署
+- `wrangler.jsonc` 的 `name` 必須與後台 Worker 名稱 `hotelspages` 一致；404 靠 `not_found_handling: "404-page"`
+- 所有變數（`SITE_URL`、聯盟 ID、`GA_MEASUREMENT_ID`、`GOOGLE_SITE_VERIFICATION`）都在建置時寫進頁面，必須設在 Cloudflare 的「建置變數」，改完要重新部署
+- sitemap 由 `@astrojs/sitemap` 產生（`/sitemap-index.xml`），robots.txt 由 `src/pages/robots.txt.ts` 產生
+- GA4 合作連結點擊事件：`affiliate_click`（參數 partner、placement、link_domain），來源是連結上的 `data-partner` / `data-placement`
+
 ## 編輯推薦飯店
 - 寫在 `src/data/destinations.json` 各區域的 `picks` 陣列，每筆：
   `{ "name": "飯店名", "tier": "budget|mid|high", "why": "推薦理由", "sponsored": false, "urls": { "tripcom": "", "agoda": "", "booking": "" } }`

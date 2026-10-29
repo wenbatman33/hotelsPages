@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { COUNTRIES, esimPath, hotelsPath } from '../lib/destinations';
+---
+
+<Base title="找不到這個頁面" description="這個網址不存在，回到 eSIM 比價或住哪區繼續規劃。" noindex>
+  <section class="mx-auto max-w-xl px-4 pt-14 text-center">
+    <div class="ticket rise mx-auto px-6 pb-6 pt-8 [--notch-y:calc(100%_-_5.5rem)]">
+      <p class="num text-7xl font-semibold tracking-tight text-stamp">404</p>
+      <h1 class="mt-3 text-2xl font-bold text-balance">這張票沒有目的地</h1>
+      <p class="mt-2 text-sm text-ink-soft">網址可能打錯了，或頁面已經搬家。</p>
+      <div class="perforation mt-7"></div>
+      <div class="mt-5 flex flex-wrap justify-center gap-2">
+        <a href="/esim/" class="btn-ink">eSIM 比價</a>
+        <a href="/hotels/" class="btn-line">住哪區</a>
+        <a href="/" class="btn-line">回首頁</a>
+      </div>
+    </div>
+
+    <ul class="rise mt-8 flex flex-wrap justify-center gap-2 text-sm" style="animation-delay: 80ms">
+      {COUNTRIES.flatMap((country) => [
+        <li><a href={esimPath(country)} class="chip inline-block">{country.name} eSIM</a></li>,
+        ...country.cities.map((city) => (
+          <li><a href={hotelsPath(country, city)} class="chip inline-block">{city.name}住哪區</a></li>
+        )),
+      ])}
+    </ul>
+  </section>
+</Base>

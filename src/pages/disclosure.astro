@@ -5,6 +5,7 @@ import { FX, PROVIDERS, lastChecked, PLANS } from '../lib/esim';
 import { PARTNERS } from '../lib/affiliate';
 
 const checked = lastChecked(PLANS);
+const analyticsOn = Boolean(import.meta.env.GA_MEASUREMENT_ID);
 const hotelPartners = (['tripcom', 'agoda', 'booking'] as const).map((id) => PARTNERS[id].name);
 const esimPartners = Object.values(PROVIDERS).map((p) => p.name);
 ---
@@ -37,6 +38,18 @@ const esimPartners = Object.values(PROVIDERS).map((p) => p.name);
       <li>標示「示意價格」的方案尚未查核，僅供參考。</li>
       <li>住宿目前不顯示房價，房價會隨日期變動，請以訂房平台頁面為準。</li>
     </ul>
+
+    {analyticsOn && (
+      <>
+        <h2 class="mt-10 text-xl font-bold">隱私與流量統計</h2>
+        <p class="mt-3 text-ink-soft">
+          本站使用 Google Analytics 了解網站使用情況，例如瀏覽了哪些頁面、點了哪個合作連結。
+          Google Analytics 會使用 cookie，收集的是匿名統計資料，本站不會取得你的姓名、電話或付款資訊。
+          不想被統計，可以在瀏覽器封鎖 cookie，或安裝 Google 提供的
+          <a href="https://tools.google.com/dlpage/gaoptout" class="underline" rel="noopener" target="_blank">停用外掛</a>。
+        </p>
+      </>
+    )}
 
     <h2 class="mt-10 text-xl font-bold">發現錯誤</h2>
     <p class="mt-3 text-ink-soft">價格與方案內容可能隨平台調整而變動，購買前請以結帳頁面為準。</p>

@@ -7,9 +7,14 @@ interface Props {
   description: string;
   /** JSON-LD 結構化資料（可多筆） */
   jsonLd?: Record<string, unknown>[];
+  /** 不讓搜尋引擎收錄（例如 404） */
+  noindex?: boolean;
 }
 
-const { title, description, jsonLd = [] } = Astro.props;
+const { title, description, jsonLd = [], noindex = false } = Astro.props;
+// 以下兩個由 Cloudflare 建置變數提供，沒設定就不輸出
+const gaId = import.meta.env.GA_MEASUREMENT_ID;
+const siteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION;
 const fullTitle = title === SITE.name ? title : `${title}｜${SITE.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
@@ -27,6 +32,8 @@ const nav = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {siteVerification && <meta name="google-site-verification" content={siteVerification} />}
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh_TW" />
@@ -43,6 +50,30 @@ const nav = [
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
     />
     {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+    {gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', gaId);
+          // 合作連結點擊：記錄平台與按鈕位置，GA4 事件名稱 affiliate_click
+          document.addEventListener('click', function (e) {
+            var link = e.target.closest && e.target.closest('a[data-partner]');
+            if (!link) return;
+            gtag('event', 'affiliate_click', {
+              partner: link.dataset.partner,
+              placement: link.dataset.placement || '',
+              link_domain: link.hostname,
+            });
+          });
+        </script>
+      </>
+    )}
   </head>
   <body class="min-h-dvh">
     <header class="border-b border-ink/10">

@@ -1,0 +1,11 @@
+// Cloudflare Workers 靜態網站設定（Workers Builds 會用 `npx wrangler deploy` 讀這個檔）
+{
+  // 必須與 Cloudflare 後台的 Worker 名稱一致
+  "name": "hotelspages",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // 找不到頁面時回傳 dist/404.html（狀態碼 404）
+    "not_found_handling": "404-page"
+  }
+}
