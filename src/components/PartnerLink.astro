@@ -1,0 +1,28 @@
+---
+// 聯盟連結統一外觀與屬性：sponsored / nofollow，並標示「合作連結」
+import type { PartnerId } from '../lib/affiliate';
+
+interface Props {
+  href: string;
+  partner: PartnerId;
+  variant?: 'ink' | 'line';
+  class?: string;
+  /** 點擊追蹤用的位置標記，之後接分析工具 */
+  placement?: string;
+}
+
+const { href, partner, variant = 'line', class: className, placement } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="sponsored nofollow noopener"
+  data-partner={partner}
+  data-placement={placement}
+  class:list={[variant === 'ink' ? 'btn-ink' : 'btn-line', className]}
+>
+  <slot />
+  <span aria-hidden="true">↗</span>
+  <span class="sr-only">（合作連結，另開新視窗）</span>
+</a>

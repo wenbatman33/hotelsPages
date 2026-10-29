@@ -1,0 +1,47 @@
+---
+// 編輯推薦飯店（放在區域卡內）
+import PartnerLink from './PartnerLink.astro';
+import { PARTNERS, hotelPickLink } from '../lib/affiliate';
+import { TIER_LABEL, type HotelPick } from '../lib/destinations';
+
+interface Props {
+  pick: HotelPick;
+  placement: string;
+}
+
+const { pick, placement } = Astro.props;
+const order = ['tripcom', 'agoda', 'booking'] as const;
+const links = order
+  .map((key) => pick.urls[key])
+  .filter((u): u is string => Boolean(u))
+  .map((u) => hotelPickLink(u));
+const tierIndex = (['budget', 'mid', 'high'] as const).indexOf(pick.tier);
+---
+
+<li class="rounded-lg border border-line/80 bg-paper/70 px-3.5 py-3">
+  <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+    <p class="font-display text-lg font-bold leading-snug">{pick.name}</p>
+    <span class="num rounded bg-ink px-1.5 py-0.5 text-[11px] font-semibold text-paper" title={TIER_LABEL[pick.tier]}>
+      {'$'.repeat(tierIndex + 1)}
+    </span>
+    {pick.sponsored ? (
+      <span class="stamp border-sun bg-sun/10 text-sun-ink">廣告</span>
+    ) : (
+      <span class="stamp border-stamp/40 text-stamp">★ 編輯推薦</span>
+    )}
+  </div>
+  <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{pick.why}</p>
+  <div class="mt-2.5 flex flex-wrap gap-2">
+    {links.map((link, i) => (
+      <PartnerLink
+        href={link.href}
+        partner={link.partner}
+        variant={i === 0 ? 'ink' : 'line'}
+        placement={placement}
+        class="px-3! py-1.5! text-xs!"
+      >
+        {i === 0 ? `${PARTNERS[link.partner].name} 看這間` : PARTNERS[link.partner].name}
+      </PartnerLink>
+    ))}
+  </div>
+</li>

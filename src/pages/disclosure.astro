@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+import { FX, PROVIDERS, lastChecked, PLANS } from '../lib/esim';
+import { PARTNERS } from '../lib/affiliate';
+
+const checked = lastChecked(PLANS);
+const hotelPartners = (['tripcom', 'agoda', 'booking'] as const).map((id) => PARTNERS[id].name);
+const esimPartners = Object.values(PROVIDERS).map((p) => p.name);
+---
+
+<Base title="資料來源與合作揭露" description={`${SITE.name}的收入來源、價格資料怎麼來，以及排序原則。`}>
+  <article class="mx-auto max-w-2xl px-4 pt-10 leading-relaxed">
+    <h1 class="text-3xl font-bold">資料來源與合作揭露</h1>
+
+    <h2 class="mt-10 text-xl font-bold">我們怎麼賺錢</h2>
+    <p class="mt-3 text-ink-soft">
+      {SITE.name}是旅遊資訊整理網站，不是旅行社，不販售也不代訂任何商品。
+      網站上的訂房、eSIM 按鈕可能是合作連結：你透過連結購買，價格和你自己去官網買一樣，
+      平台會付給我們一小部分分潤，這是維持網站運作的主要收入。
+    </p>
+    <ul class="mt-3 list-disc space-y-1 pl-5 text-ink-soft">
+      <li>住宿：{hotelPartners.join('、')}</li>
+      <li>eSIM：{esimPartners.join('、')}</li>
+    </ul>
+
+    <h2 class="mt-10 text-xl font-bold">排序不看分潤</h2>
+    <p class="mt-3 text-ink-soft">
+      eSIM 比價一律依你選的天數與用量篩選，再依價格由低到高排序，不因分潤高低調整順序。
+      住宿區域的優缺點是編輯整理，不收取任何飯店或平台的費用。
+    </p>
+
+    <h2 class="mt-10 text-xl font-bold">價格怎麼來</h2>
+    <ul class="mt-3 list-disc space-y-1 pl-5 text-ink-soft">
+      <li>eSIM：人工查核各家官網售價（美元），最近查核日 <span class="num">{checked}</span>，至少每月更新一次。</li>
+      <li>台幣換算：1 美元兌 <span class="num">{FX.USD_TWD}</span> 元（{FX.source}，<span class="num">{FX.date}</span>），未含信用卡海外交易手續費。</li>
+      <li>標示「示意價格」的方案尚未查核，僅供參考。</li>
+      <li>住宿目前不顯示房價，房價會隨日期變動，請以訂房平台頁面為準。</li>
+    </ul>
+
+    <h2 class="mt-10 text-xl font-bold">發現錯誤</h2>
+    <p class="mt-3 text-ink-soft">價格與方案內容可能隨平台調整而變動，購買前請以結帳頁面為準。</p>
+  </article>
+</Base>

@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+import { COUNTRIES, allCities, esimPath, hotelsPath } from '../lib/destinations';
+import { PLANS, cheapestFor, plansFor, toTWD } from '../lib/esim';
+
+const minEsim = toTWD(Math.min(...PLANS.map((p) => p.priceUSD)));
+const cityCount = allCities().length;
+const areaCount = allCities().reduce((n, { city }) => n + city.areas.length, 0);
+
+const rows = COUNTRIES.map((country) => {
+  const plans = plansFor(country.slug);
+  const unl5 = cheapestFor(plans, 5, null);
+  return { country, unl5 };
+});
+---
+
+<Base title={SITE.name} description="出國前兩件事一次搞定：各城市住哪區最方便、eSIM 哪家最便宜。日本、韓國、泰國價格人工查核，一鍵比價。">
+  <section class="mx-auto max-w-5xl px-4 pt-10 sm:pt-16">
+    <p class="rise text-xs font-semibold tracking-[0.3em] text-stamp">BEFORE YOU FLY</p>
+    <h1 class="rise mt-3 max-w-2xl text-4xl font-bold leading-[1.15] sm:text-6xl" style="animation-delay: 60ms">
+      機票訂好了，<br />剩下<span class="relative whitespace-nowrap text-stamp">住哪<svg class="absolute -bottom-1 left-0 w-full" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M1 5.5C25 2 60 1.5 99 4" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></span>跟<span class="whitespace-nowrap text-sea">網路</span>。
+    </h1>
+    <p class="rise mt-5 max-w-xl leading-relaxed text-ink-soft" style="animation-delay: 120ms">
+      不用開十個分頁比價。我們把各城市的住宿區域優缺點整理好，eSIM 依你的天數和用量直接算出最省方案。
+    </p>
+
+    <div class="mt-9 grid gap-4 sm:grid-cols-2">
+      <a href="/esim/" class="rise ticket group flex flex-col transition hover:-translate-y-1 [--notch-y:calc(100%_-_4.75rem)]" style="animation-delay: 180ms">
+        <div class="flex-1 px-5 pb-4 pt-5">
+          <p class="stamp border-sea/50 text-sea">ESIM</p>
+          <p class="mt-3 font-display text-2xl font-bold">eSIM 比價</p>
+          <p class="mt-1 text-sm text-ink-soft">選天數、選用量，最省的排第一。吃到飽降速規則也寫清楚。</p>
+        </div>
+        <div class="perforation mx-3"></div>
+        <div class="flex h-[4.75rem] items-center justify-between px-5">
+          <p><span class="text-xs text-ink-soft">最低 </span><span class="num text-2xl font-semibold">NT${minEsim}</span><span class="text-xs text-ink-soft"> 起</span></p>
+          <span class="font-semibold text-stamp transition group-hover:translate-x-1">開始比 →</span>
+        </div>
+      </a>
+      <a href="/hotels/" class="rise ticket group flex flex-col transition hover:-translate-y-1 [--notch-y:calc(100%_-_4.75rem)]" style="animation-delay: 240ms">
+        <div class="flex-1 px-5 pb-4 pt-5">
+          <p class="stamp border-stamp/50 text-stamp">STAY</p>
+          <p class="mt-3 font-display text-2xl font-bold">住哪區</p>
+          <p class="mt-1 text-sm text-ink-soft">每一區適合誰、交通怎麼接、要注意什麼，看完再訂房。</p>
+        </div>
+        <div class="perforation mx-3"></div>
+        <div class="flex h-[4.75rem] items-center justify-between px-5">
+          <p><span class="num text-2xl font-semibold">{cityCount}</span><span class="text-xs text-ink-soft"> 城市・</span><span class="num text-2xl font-semibold">{areaCount}</span><span class="text-xs text-ink-soft"> 區域</span></p>
+          <span class="font-semibold text-stamp transition group-hover:translate-x-1">去看看 →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-16 max-w-5xl px-4">
+    <h2 class="text-2xl font-bold">熱門目的地</h2>
+    <div class="mt-5 grid gap-4 md:grid-cols-3">
+      {rows.map(({ country, unl5 }) => (
+        <div class="rounded-2xl border border-line bg-card p-5">
+          <p class="font-display text-2xl font-bold"><span aria-hidden="true">{country.flag}</span> {country.name}</p>
+          <ul class="mt-3 space-y-1.5 text-sm">
+            {country.cities.map((city) => (
+              <li>
+                <a href={hotelsPath(country, city)} class="flex items-center justify-between hover:text-stamp">
+                  <span>{city.name}住哪區</span><span aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+            <li class="perforation my-2"></li>
+            <li>
+              <a href={esimPath(country)} class="flex items-center justify-between hover:text-stamp">
+                <span>{country.name} eSIM</span>
+                {unl5 && <span class="num text-xs text-ink-soft">5 天吃到飽 NT${toTWD(unl5.priceUSD)}</span>}
+              </a>
+            </li>
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p class="mt-6 rounded-xl border border-dashed border-ink/20 px-4 py-3 text-sm text-ink-soft">
+      ✈️ 用預算找機票目的地的功能準備中。
+    </p>
+  </section>
+</Base>

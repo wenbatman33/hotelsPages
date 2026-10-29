@@ -1,0 +1,131 @@
+---
+// eSIM 挑選器：選天數與每日用量，前端即時篩出最便宜的方案
+import EsimTicket from './EsimTicket.astro';
+import type { EsimPlan } from '../lib/esim';
+
+interface Props {
+  plans: EsimPlan[];
+}
+
+const { plans } = Astro.props;
+const sorted = [...plans].sort((a, b) => a.priceUSD - b.priceUSD);
+
+const dayOptions = [3, 5, 7, 10, 15, 30];
+const usageOptions = [
+  { value: '0.5', label: '輕度', hint: '地圖、LINE，每天約 0.5GB' },
+  { value: '1', label: '一般', hint: 'IG、查資料，每天約 1GB' },
+  { value: '2', label: '重度', hint: '看影片、分享熱點，每天約 2GB' },
+  { value: 'unl', label: '吃到飽', hint: '不想算流量' },
+];
+---
+
+<section class="esim-picker" data-default-days="5" data-default-use="1">
+  <div class="rounded-2xl border border-ink/10 bg-paper-2/60 p-4 sm:p-5">
+    <fieldset>
+      <legend class="text-xs font-semibold tracking-[0.2em] text-ink-soft">STEP 1 · 去幾天</legend>
+      <div class="mt-2 flex flex-wrap gap-2">
+        {dayOptions.map((d) => (
+          <button type="button" class="chip num" data-days-option={d} aria-pressed="false">
+            {d} 天
+          </button>
+        ))}
+      </div>
+    </fieldset>
+    <fieldset class="mt-4">
+      <legend class="text-xs font-semibold tracking-[0.2em] text-ink-soft">STEP 2 · 每天用多少</legend>
+      <div class="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {usageOptions.map((u) => (
+          <button
+            type="button"
+            class="chip flex flex-col items-start rounded-xl! px-3 py-2 text-left"
+            data-use-option={u.value}
+            aria-pressed="false"
+          >
+            <span class="font-semibold">{u.label}</span>
+            <span class="text-[11px] leading-snug opacity-80">{u.hint}</span>
+          </button>
+        ))}
+      </div>
+    </fieldset>
+  </div>
+
+  <p class="picker-summary mt-5 min-h-6 text-sm text-ink-soft" aria-live="polite"></p>
+
+  <ol class="picker-list mt-3 space-y-3">
+    {sorted.map((plan) => <EsimTicket plan={plan} placement="esim-picker" />)}
+  </ol>
+
+  <button type="button" class="picker-more btn-line mt-4 hidden w-full"></button>
+</section>
+
+<script>
+  const LIMIT = 5;
+
+  document.querySelectorAll<HTMLElement>('.esim-picker').forEach((root) => {
+    const list = root.querySelector<HTMLOListElement>('.picker-list')!;
+    const summary = root.querySelector<HTMLElement>('.picker-summary')!;
+    const more = root.querySelector<HTMLButtonElement>('.picker-more')!;
+    const items = [...list.querySelectorAll<HTMLLIElement>('.esim-ticket')];
+    const fx = Number(root.closest<HTMLElement>('[data-fx]')?.dataset.fx ?? 0);
+
+    let days = Number(root.dataset.defaultDays);
+    let use = root.dataset.defaultUse!;
+    let expanded = false;
+
+    function render() {
+      const perDay = use === 'unl' ? null : Number(use);
+      const matched = items
+        .filter((li) => {
+          const planDays = Number(li.dataset.days);
+          const unlimited = li.dataset.unlimited === '1';
+          if (planDays < days) return false;
+          if (perDay === null) return unlimited;
+          return unlimited || Number(li.dataset.gb) >= days * perDay;
+        })
+        .sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price));
+
+      items.forEach((li) => {
+        li.hidden = true;
+        li.querySelector('.best-badge')?.classList.add('hidden');
+      });
+      matched.forEach((li, i) => {
+        list.appendChild(li);
+        li.hidden = !expanded && i >= LIMIT;
+        if (i === 0) li.querySelector('.best-badge')?.classList.remove('hidden');
+      });
+
+      if (matched.length === 0) {
+        summary.textContent = '沒有剛好符合的方案，試試縮短天數或降低用量。';
+      } else {
+        const cheapest = Math.round(Number(matched[0].dataset.price) * fx);
+        const need = perDay === null ? '吃到飽' : `至少 ${+(days * perDay).toFixed(1)}GB`;
+        summary.textContent = `${days} 天・${need}：符合 ${matched.length} 個方案，最省 NT$${cheapest.toLocaleString('zh-TW')}`;
+      }
+
+      const hiddenCount = matched.length - LIMIT;
+      more.hidden = expanded || hiddenCount <= 0;
+      more.classList.toggle('hidden', more.hidden);
+      more.textContent = `再看 ${hiddenCount} 個方案`;
+
+      root.querySelectorAll<HTMLButtonElement>('[data-days-option]').forEach((b) =>
+        b.setAttribute('aria-pressed', String(Number(b.dataset.daysOption) === days)),
+      );
+      root.querySelectorAll<HTMLButtonElement>('[data-use-option]').forEach((b) =>
+        b.setAttribute('aria-pressed', String(b.dataset.useOption === use)),
+      );
+    }
+
+    root.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest<HTMLButtonElement>('button');
+      if (!target) return;
+      if (target.dataset.daysOption) days = Number(target.dataset.daysOption);
+      else if (target.dataset.useOption) use = target.dataset.useOption;
+      else if (target === more) expanded = true;
+      else return;
+      if (target !== more) expanded = false;
+      render();
+    });
+
+    render();
+  });
+</script>

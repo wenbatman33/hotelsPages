@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  /* 紙張 / 墨色 / 郵戳紅：行李吊牌與票根的視覺方向 */
+  --color-paper: #f3ede2;
+  --color-paper-2: #e9e0cf;
+  --color-card: #fbf8f2;
+  --color-ink: #1c2532;
+  --color-ink-soft: #545e6d;
+  --color-line: #d6cab4;
+  --color-stamp: #c4422b;
+  --color-stamp-soft: #f3d9cf;
+  --color-sea: #23665f;
+  --color-sea-soft: #d5e7e2;
+  --color-sun: #e3a33b;
+  --color-sun-ink: #9a6510;
+
+  --font-display: "LXGW WenKai TC", "Noto Serif TC", serif;
+  --font-sans: "Noto Sans TC", "PingFang TC", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    /* 細微紙紋 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.14 0 0 0 0 0.2 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  h1, h2, h3 {
+    @apply font-display;
+    letter-spacing: 0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-stamp);
+    outline-offset: 2px;
+  }
+}
+
+/* 自訂元件類別：Tailwind v4 需用 @utility 才能被 @apply */
+
+/* 票根卡片：左右兩側半圓缺口 */
+@utility ticket {
+  position: relative;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  --notch: 9px;
+  --notch-y: 50%;
+  mask:
+    radial-gradient(circle var(--notch) at 0 var(--notch-y), #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% var(--notch-y), #0000 98%, #000) right / 51% 100% no-repeat;
+}
+
+/* 方案票券：手機版票根在下方（左右缺口），桌機版票根在右側（上下缺口） */
+@utility ticket-row {
+  position: relative;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  --notch: 9px;
+  --stub-h: 4.75rem;
+  --stub-w: 12rem;
+  mask:
+    radial-gradient(circle var(--notch) at 0 calc(100% - var(--stub-h)), #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% calc(100% - var(--stub-h)), #0000 98%, #000) right / 51% 100% no-repeat;
+  @media (min-width: 640px) {
+    mask:
+      radial-gradient(circle var(--notch) at calc(100% - var(--stub-w)) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+      radial-gradient(circle var(--notch) at calc(100% - var(--stub-w)) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+  }
+}
+
+/* 打孔虛線（水平 / 垂直） */
+@utility perforation {
+  background-image: linear-gradient(to right, var(--color-line) 50%, transparent 0);
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+  height: 1px;
+}
+@utility perforation-v {
+  background-image: linear-gradient(to bottom, var(--color-line) 50%, transparent 0);
+  background-size: 1px 10px;
+  background-repeat: repeat-y;
+  width: 1px;
+}
+
+@utility num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 郵戳式標籤 */
+@utility stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-width: 1px;
+  border-radius: var(--radius-xs);
+  padding: 0.125rem 0.375rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 0.875rem;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  font-weight: 600;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+@utility btn-ink {
+  @apply btn bg-ink text-paper hover:bg-stamp;
+}
+@utility btn-line {
+  @apply btn border border-ink/25 text-ink hover:border-ink hover:bg-ink/5;
+}
+
+@utility chip {
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--color-ink) 20%, transparent);
+  padding: 0.375rem 0.75rem;
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  &:hover {
+    border-color: var(--color-ink);
+  }
+  &[aria-pressed="true"] {
+    border-color: var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+}

@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import { SITE } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  /** JSON-LD 結構化資料（可多筆） */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const { title, description, jsonLd = [] } = Astro.props;
+const fullTitle = title === SITE.name ? title : `${title}｜${SITE.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+
+const nav = [
+  { href: '/esim/', label: 'eSIM 比價' },
+  { href: '/hotels/', label: '住哪區' },
+];
+---
+
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#f3ede2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+    />
+    {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+  </head>
+  <body class="min-h-dvh">
+    <header class="border-b border-ink/10">
+      <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
+        <a href="/" class="flex items-baseline gap-2">
+          <span class="font-display text-2xl font-bold">{SITE.name}</span>
+          <span class="hidden text-xs text-ink-soft sm:inline">{SITE.tagline}</span>
+        </a>
+        <nav class="flex items-center gap-1 text-sm">
+          {nav.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'rounded-md px-2.5 py-1.5 transition hover:bg-ink/5',
+                path.startsWith(item.href) && 'bg-ink text-paper hover:bg-ink',
+              ]}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="mt-20 border-t border-ink/10">
+      <div class="mx-auto max-w-5xl space-y-3 px-4 py-8 text-xs leading-relaxed text-ink-soft">
+        <p>
+          本站部分連結為合作連結：你透過連結訂購，價格不變，本站可能獲得分潤。
+          價格為人工查核或平台觀測的參考值，實際以訂購頁面為準。
+          <a href="/disclosure/" class="underline underline-offset-2 hover:text-ink">資料來源與合作揭露</a>
+        </p>
+        <p>© {new Date().getFullYear()} {SITE.name}</p>
+      </div>
+    </footer>
+  </body>
+</html>

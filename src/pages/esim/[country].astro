@@ -1,0 +1,164 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import EsimPicker from '../../components/EsimPicker.astro';
+import { COUNTRIES, hotelsPath, type Country } from '../../lib/destinations';
+import { FX, PROVIDERS, cheapestFor, lastChecked, planLabel, plansFor, toTWD } from '../../lib/esim';
+import { breadcrumbLd, faqLd } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return COUNTRIES.filter((c) => plansFor(c.slug).length > 0).map((country) => ({
+    params: { country: country.slug },
+    props: { country },
+  }));
+}
+
+interface Props {
+  country: Country;
+}
+
+const { country } = Astro.props;
+const plans = plansFor(country.slug);
+const minTWD = toTWD(Math.min(...plans.map((p) => p.priceUSD)));
+const checked = lastChecked(plans);
+const providerNames = [...new Set(plans.map((p) => PROVIDERS[p.provider].name))];
+
+// 常見組合：給沒耐心操作篩選器的人，也讓搜尋引擎讀得到具體答案
+const combos = [
+  { label: '5 天・一般用量', days: 5, perDay: 1 },
+  { label: '5 天・吃到飽', days: 5, perDay: null },
+  { label: '7 天・一般用量', days: 7, perDay: 1 },
+  { label: '7 天・吃到飽', days: 7, perDay: null },
+].map((c) => ({ ...c, plan: cheapestFor(plans, c.days, c.perDay) }));
+
+// 吃到飽的降速規則（依供應商）
+const unlimitedRules = providerNames
+  .map((name) => {
+    const p = plans.find((x) => x.unlimited && PROVIDERS[x.provider].name === name);
+    return p ? `${name} 每天 ${p.dailyHighSpeedGB}GB 高速，超過後降到 ${p.throttle}` : null;
+  })
+  .filter(Boolean);
+
+const faqs = [
+  {
+    q: `去${country.name}要買多少流量？`,
+    a: '只用地圖和通訊軟體，每天約 0.5GB 就夠；常滑 IG、查資料抓每天 1GB；要看影片或分享熱點給同行的人，每天 2GB 以上或直接買吃到飽。',
+  },
+  {
+    q: '吃到飽真的不限速嗎？',
+    a: `不是。${unlimitedRules.join('；')}。降速後傳訊息、看地圖還可以，看影片會卡。`,
+  },
+  {
+    q: '我的手機能用 eSIM 嗎？',
+    a: 'iPhone XS／XR 之後的機型大多支援，但手機必須沒有鎖電信商。Android 依機型而定，可在撥號畫面輸入 *#06#，有出現 EID 通常就支援。',
+  },
+  {
+    q: '什麼時候安裝比較好？',
+    a: '建議出發前在台灣、連著 Wi-Fi 時先安裝好，抵達後再打開這張 eSIM 的行動數據與漫遊。開始計算天數的時間點各家規定不同，購買前請看方案說明。',
+  },
+  {
+    q: '這裡的價格準嗎？',
+    a: `價格為本站 ${checked} 人工查核的官網售價（美元），台幣以 1 美元兌 ${FX.USD_TWD} 元換算，未含信用卡海外交易手續費（約 1.5%），實際以結帳頁為準。`,
+  },
+];
+
+const crumbs = [
+  { name: '首頁', href: '/' },
+  { name: 'eSIM 比價', href: '/esim/' },
+  { name: `${country.name} eSIM`, href: `/esim/${country.slug}/` },
+];
+
+const title = `${country.name} eSIM 比價：${plans.length} 個方案，最低 NT$${minTWD} 起`;
+const description = `比較 ${providerNames.join('、')} 的${country.name} eSIM，依天數與每日用量挑出最便宜的方案。價格 ${checked} 查核，含吃到飽降速規則與安裝提醒。`;
+---
+
+<Base title={title} description={description} jsonLd={[breadcrumbLd(crumbs, Astro.site), faqLd(faqs)]}>
+  <div class="mx-auto max-w-3xl px-4 pt-6" data-fx={FX.USD_TWD}>
+    <Breadcrumb items={crumbs} />
+
+    <header class="rise mt-5">
+      <p class="text-xs font-semibold tracking-[0.25em] text-stamp">{country.flag} ESIM · {country.slug.replace('-', ' ').toUpperCase()}</p>
+      <h1 class="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
+        {country.name} eSIM，<br class="sm:hidden" />先算清楚再買
+      </h1>
+      <p class="mt-3 text-ink-soft">
+        {providerNames.join('、')} 共 <span class="num text-ink">{plans.length}</span> 個方案，最低
+        <span class="num font-semibold text-ink">NT${minTWD}</span> 起。選天數和用量，直接告訴你哪個最省。
+      </p>
+      <p class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-ink-soft">
+        <span>價格查核日 <span class="num">{checked}</span></span>
+        <span>匯率 1 USD = <span class="num">{FX.USD_TWD}</span> TWD</span>
+        <span>未含海外刷卡手續費</span>
+      </p>
+    </header>
+
+    <div class="rise mt-6" style="animation-delay: 80ms">
+      <EsimPicker plans={plans} />
+      <p class="mt-3 text-[11px] text-ink-soft">
+        按鈕為合作連結，你的購買價格不變，本站可能獲得分潤。<a href="/disclosure/" class="underline">揭露說明</a>
+      </p>
+    </div>
+
+    <section class="mt-14">
+      <h2 class="text-2xl font-bold">常見行程，直接看答案</h2>
+      <div class="mt-4 overflow-hidden rounded-xl border border-line bg-card">
+        <table class="w-full text-sm">
+          <thead class="bg-paper-2/70 text-left text-xs text-ink-soft">
+            <tr>
+              <th class="px-4 py-2.5 font-medium">行程</th>
+              <th class="px-4 py-2.5 font-medium">最省方案</th>
+              <th class="px-4 py-2.5 text-right font-medium">價格</th>
+            </tr>
+          </thead>
+          <tbody>
+            {combos.map((c) => (
+              <tr class="border-t border-line/70">
+                <td class="px-4 py-3">{c.label}</td>
+                <td class="px-4 py-3">
+                  {c.plan ? `${PROVIDERS[c.plan.provider].name} ${planLabel(c.plan)}` : '—'}
+                </td>
+                <td class="num px-4 py-3 text-right font-semibold">{c.plan ? `NT$${toTWD(c.plan.priceUSD)}` : '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {country.cities.length > 0 && (
+      <section class="mt-14">
+        <h2 class="text-2xl font-bold">網路搞定了，住哪裡？</h2>
+        <p class="mt-2 text-sm text-ink-soft">住錯區，每天多花一小時通勤。先看各區優缺點再訂房。</p>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+          {country.cities.map((city) => (
+            <a
+              href={hotelsPath(country, city)}
+              class="ticket group flex items-center justify-between px-5 py-4 transition hover:-translate-y-0.5"
+            >
+              <span>
+                <span class="block font-display text-xl font-bold">{city.name}住哪區</span>
+                <span class="text-xs text-ink-soft">{city.areas.map((a) => a.name).join('・')}</span>
+              </span>
+              <span class="text-stamp transition group-hover:translate-x-1" aria-hidden="true">→</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="mt-14">
+      <h2 class="text-2xl font-bold">常見問題</h2>
+      <div class="mt-4 divide-y divide-line rounded-xl border border-line bg-card">
+        {faqs.map((f) => (
+          <details class="group px-4 py-3.5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">
+              {f.q}
+              <span class="text-ink-soft transition group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>

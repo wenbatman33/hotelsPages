@@ -1,0 +1,52 @@
+---
+// 單一 eSIM 方案票券；data-* 給前端篩選器使用
+import PartnerLink from './PartnerLink.astro';
+import { PROVIDERS, planLabel, planUrl, toTWD, type EsimPlan } from '../lib/esim';
+
+interface Props {
+  plan: EsimPlan;
+  placement: string;
+}
+
+const { plan, placement } = Astro.props;
+const provider = PROVIDERS[plan.provider];
+const twd = toTWD(plan.priceUSD);
+const perDay = Math.round(twd / plan.days);
+const detail = plan.unlimited
+  ? `每天 ${plan.dailyHighSpeedGB}GB 高速，用完降速 ${plan.throttle}`
+  : `總量 ${plan.dataGB}GB，${plan.days} 天內用完`;
+---
+
+<li
+  class="ticket-row esim-ticket flex flex-col sm:flex-row"
+  data-days={plan.days}
+  data-gb={plan.dataGB ?? ''}
+  data-unlimited={plan.unlimited ? '1' : '0'}
+  data-price={plan.priceUSD}
+>
+  <div class="min-w-0 flex-1 px-4 pb-3 pt-3.5">
+    <div class="flex flex-wrap items-center gap-2 text-xs text-ink-soft">
+      <span class="font-semibold tracking-wider text-ink">{provider.name}</span>
+      {plan.networks.length > 0 && <span>· {plan.networks.join(' / ')}</span>}
+      <span class="best-badge stamp hidden -rotate-2 border-stamp text-stamp">最省</span>
+      {!plan.verified && <span class="stamp border-sun text-sun">示意價格</span>}
+    </div>
+    <p class="mt-1 font-display text-xl font-bold leading-snug">{planLabel(plan)}</p>
+    <p class="mt-0.5 text-sm text-ink-soft">{detail}</p>
+  </div>
+
+  <div class="perforation mx-3 sm:hidden"></div>
+  <div class="perforation-v my-3 hidden sm:block"></div>
+
+  <div class="flex h-(--stub-h) shrink-0 items-center justify-between gap-3 px-4 sm:h-auto sm:w-(--stub-w) sm:flex-col sm:items-stretch sm:justify-center sm:py-3">
+    <div class="leading-tight">
+      <p class="num text-2xl font-semibold">
+        <span class="text-sm font-medium text-ink-soft">NT$</span>{twd.toLocaleString('zh-TW')}
+      </p>
+      <p class="num text-[11px] text-ink-soft">US${plan.priceUSD.toFixed(2)} · 每天約 {perDay} 元</p>
+    </div>
+    <PartnerLink href={planUrl(plan)} partner={plan.provider} variant="ink" placement={placement} class="sm:w-full">
+      去 {provider.name}
+    </PartnerLink>
+  </div>
+</li>

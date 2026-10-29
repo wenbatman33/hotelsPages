@@ -1,0 +1,76 @@
+---
+// 住宿區域卡（行李吊牌造型）
+import PartnerLink from './PartnerLink.astro';
+import HotelPickCard from './HotelPickCard.astro';
+import { TIER_LABEL, type Area, type City, type Tier } from '../lib/destinations';
+import { bookingSearch, tripcomHotels } from '../lib/affiliate';
+
+interface Props {
+  area: Area;
+  city: City;
+  index: number;
+}
+
+const { area, city, index } = Astro.props;
+const tiers: Tier[] = ['budget', 'mid', 'high'];
+const no = String(index + 1).padStart(2, '0');
+---
+
+<article
+  class="area-card ticket relative overflow-hidden pl-6 pr-5 pt-5 pb-4 [--notch-y:2.6rem]"
+  data-tags={area.goodFor.join('|')}
+  id={area.slug}
+>
+  <span class="num pointer-events-none absolute -bottom-5 right-2 text-7xl font-semibold text-ink/[0.05]" aria-hidden="true">{no}</span>
+
+  <header class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+    <h3 class="text-2xl font-bold">{area.name}</h3>
+    <p class="flex items-center gap-1" aria-label={`價位：${area.tiers.map((t) => TIER_LABEL[t]).join('、')}`}>
+      {tiers.map((t) => (
+        <span
+          class:list={[
+            'num rounded px-1.5 py-0.5 text-[11px] font-semibold',
+            area.tiers.includes(t) ? 'bg-ink text-paper' : 'bg-ink/5 text-ink/30',
+          ]}
+          title={TIER_LABEL[t]}
+        >
+          {'$'.repeat(tiers.indexOf(t) + 1)}
+        </span>
+      ))}
+    </p>
+  </header>
+
+  <ul class="mt-2 flex flex-wrap gap-1.5">
+    {area.goodFor.map((tag) => <li class="stamp border-sea/40 bg-sea-soft/60 text-sea">{tag}</li>)}
+  </ul>
+
+  <dl class="mt-4 space-y-2.5 text-sm leading-relaxed">
+    <div class="flex gap-2.5">
+      <dt class="mt-0.5 shrink-0 text-xs font-bold text-sea">好在</dt>
+      <dd>{area.why}</dd>
+    </div>
+    <div class="flex gap-2.5">
+      <dt class="mt-0.5 shrink-0 text-xs font-bold text-stamp">注意</dt>
+      <dd class="text-ink-soft">{area.watch}</dd>
+    </div>
+  </dl>
+
+  {area.picks.length > 0 && (
+    <section class="mt-4" aria-label={`${area.name}推薦飯店`}>
+      <h4 class="text-xs font-semibold tracking-[0.2em] text-ink-soft">這區推薦住</h4>
+      <ul class="mt-2 space-y-2">
+        {area.picks.map((pick) => <HotelPickCard pick={pick} placement={`pick-${area.slug}`} />)}
+      </ul>
+    </section>
+  )}
+
+  <div class="perforation mt-4"></div>
+  <div class="mt-3 flex flex-wrap gap-2">
+    <PartnerLink href={bookingSearch(area.bookingQuery)} partner="booking" variant="ink" placement={`area-${area.slug}`}>
+      Booking.com 看這區
+    </PartnerLink>
+    <PartnerLink href={tripcomHotels(city.tripcomCityId)} partner="tripcom" placement={`area-${area.slug}`}>
+      Trip.com 比價
+    </PartnerLink>
+  </div>
+</article>

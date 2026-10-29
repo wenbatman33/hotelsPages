@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { COUNTRIES, esimPath } from '../../lib/destinations';
+import { PROVIDERS, cheapestFor, lastChecked, plansFor, toTWD } from '../../lib/esim';
+import { breadcrumbLd } from '../../lib/seo';
+
+const rows = COUNTRIES.map((country) => {
+  const plans = plansFor(country.slug);
+  return {
+    country,
+    count: plans.length,
+    providers: [...new Set(plans.map((p) => PROVIDERS[p.provider].name))],
+    min: plans.length ? toTWD(Math.min(...plans.map((p) => p.priceUSD))) : null,
+    unl5: cheapestFor(plans, 5, null),
+    checked: lastChecked(plans),
+  };
+}).filter((r) => r.count > 0);
+
+const crumbs = [
+  { name: '首頁', href: '/' },
+  { name: 'eSIM 比價', href: '/esim/' },
+];
+---
+
+<Base
+  title="出國 eSIM 比價"
+  description="日本、韓國、泰國 eSIM 一次比較：依天數與每日用量挑最便宜的方案，含吃到飽降速規則，價格人工查核。"
+  jsonLd={[breadcrumbLd(crumbs, Astro.site)]}
+>
+  <div class="mx-auto max-w-3xl px-4 pt-6">
+    <Breadcrumb items={crumbs} />
+    <header class="rise mt-5">
+      <p class="text-xs font-semibold tracking-[0.25em] text-stamp">ESIM · COMPARE</p>
+      <h1 class="mt-2 text-3xl font-bold sm:text-4xl">出國上網，不用再猜哪家便宜</h1>
+      <p class="mt-3 text-ink-soft">選國家，告訴我們去幾天、每天用多少，直接列出最省的方案。</p>
+    </header>
+
+    <ul class="mt-8 space-y-4">
+      {rows.map((r, i) => (
+        <li class="rise" style={`animation-delay: ${80 + i * 60}ms`}>
+          <a href={esimPath(r.country)} class="ticket-row group flex flex-col transition hover:-translate-y-0.5 sm:flex-row">
+            <div class="flex-1 px-5 pb-3 pt-4">
+              <p class="text-xs text-ink-soft">{r.providers.join('・')} · {r.count} 個方案</p>
+              <p class="mt-1 font-display text-2xl font-bold">
+                <span aria-hidden="true">{r.country.flag}</span> {r.country.name} eSIM
+              </p>
+              {r.unl5 && (
+                <p class="mt-1 text-sm text-ink-soft">
+                  5 天吃到飽最低 <span class="num font-semibold text-ink">NT${toTWD(r.unl5.priceUSD)}</span>
+                </p>
+              )}
+            </div>
+            <div class="perforation mx-3 sm:hidden"></div>
+            <div class="perforation-v my-3 hidden sm:block"></div>
+            <div class="flex h-(--stub-h) items-center justify-between px-5 sm:h-auto sm:w-(--stub-w) sm:flex-col sm:items-start sm:justify-center">
+              <p class="leading-tight">
+                <span class="block text-[11px] text-ink-soft">最低</span>
+                <span class="num text-2xl font-semibold">NT${r.min}</span>
+                <span class="text-sm text-ink-soft"> 起</span>
+              </p>
+              <span class="text-sm font-semibold text-stamp transition group-hover:translate-x-1">比價 →</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-4 text-[11px] text-ink-soft">價格查核日 <span class="num">{rows[0]?.checked}</span>，實際以結帳頁為準。</p>
+  </div>
+</Base>

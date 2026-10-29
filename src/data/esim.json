@@ -1,0 +1,1512 @@
+{
+  "_note": "價格為人工查核的官網售價（美元）。更新時改 priceUSD 與 checkedAt；未查核的方案 verified 設 false，前台會標示「示意價格」。",
+  "fx": {
+    "USD_TWD": 32.4,
+    "date": "2026-10-29",
+    "source": "open.er-api.com"
+  },
+  "providers": {
+    "airalo": {
+      "name": "Airalo",
+      "urls": {
+        "japan": "https://www.airalo.com/japan-esim",
+        "south-korea": "https://www.airalo.com/south-korea-esim",
+        "thailand": "https://www.airalo.com/thailand-esim"
+      },
+      "highlights": [
+        "當地電信方案",
+        "可加值"
+      ]
+    },
+    "saily": {
+      "name": "Saily",
+      "urls": {
+        "japan": "https://saily.com/zh-tw/esim-japan/",
+        "south-korea": "https://saily.com/zh-tw/esim-south-korea/",
+        "thailand": "https://saily.com/zh-tw/esim-thailand/"
+      },
+      "highlights": [
+        "180 天內啟用",
+        "中文介面"
+      ]
+    }
+  },
+  "plans": [
+    {
+      "id": "airalo-japan-1gb-3d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 1,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 3,
+      "priceUSD": 4,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-3gb-3d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 3,
+      "priceUSD": 7.5,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-unl-3d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 3,
+      "priceUSD": 11.5,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-unl-5d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 5,
+      "priceUSD": 17,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-3gb-7d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 8,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-5gb-7d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 10,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-10gb-7d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 17,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-unl-7d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 7,
+      "priceUSD": 26.5,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-unl-10d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 10,
+      "priceUSD": 34.5,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-5gb-15d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 10.5,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-10gb-15d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 17.5,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-20gb-15d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 24,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-unl-15d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 15,
+      "priceUSD": 48,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-5gb-30d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 11,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-10gb-30d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 18,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-20gb-30d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 25,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-japan-unl-30d",
+      "provider": "airalo",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 30,
+      "priceUSD": 69,
+      "networks": [
+        "SoftBank",
+        "KDDI"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-unl-3d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 3,
+      "priceUSD": 11.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-unl-5d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 5,
+      "priceUSD": 18.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-1gb-7d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": 1,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 3.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-unl-7d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 7,
+      "priceUSD": 26.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-unl-10d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 10,
+      "priceUSD": 34.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-unl-15d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 15,
+      "priceUSD": 48.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-3gb-30d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 7.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-5gb-30d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 10.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-10gb-30d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 17.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-20gb-30d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 24.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-japan-unl-30d",
+      "provider": "saily",
+      "country": "japan",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 30,
+      "priceUSD": 71.99,
+      "networks": [
+        "KDDI",
+        "SoftBank"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-1gb-3d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 1,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 3,
+      "priceUSD": 4,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-3gb-3d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 3,
+      "priceUSD": 8,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-unl-3d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 3,
+      "priceUSD": 12,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-unl-5d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 5,
+      "priceUSD": 20,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-3gb-7d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 9,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-5gb-7d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 10,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-10gb-7d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 18,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-unl-7d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 7,
+      "priceUSD": 29,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-unl-10d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 10,
+      "priceUSD": 35,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-5gb-15d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 10.5,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-10gb-15d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 18.5,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-20gb-15d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 29,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-unl-15d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 15,
+      "priceUSD": 49,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-5gb-30d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 11,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-10gb-30d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 19,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-20gb-30d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 30,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-50gb-30d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": 50,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 49,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-south-korea-unl-30d",
+      "provider": "airalo",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 3,
+      "throttle": "1 Mbps",
+      "days": 30,
+      "priceUSD": 69,
+      "networks": [
+        "SK Telecom"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-unl-5d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 5,
+      "priceUSD": 18.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-1gb-7d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": 1,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 3.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-unl-7d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 7,
+      "priceUSD": 26.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-unl-10d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 10,
+      "priceUSD": 34.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-unl-15d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 15,
+      "priceUSD": 48.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-unl-20d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 20,
+      "priceUSD": 59.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-unl-25d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 25,
+      "priceUSD": 65.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-3gb-30d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 8.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-5gb-30d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 10.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-10gb-30d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 18.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-20gb-30d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 29.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-south-korea-unl-30d",
+      "provider": "saily",
+      "country": "south-korea",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 30,
+      "priceUSD": 71.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-1gb-3d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 1,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 3,
+      "priceUSD": 4,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-3gb-3d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 3,
+      "priceUSD": 5.5,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-unl-3d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 3,
+      "priceUSD": 9.5,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-unl-5d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 5,
+      "priceUSD": 15,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-3gb-7d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 6,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-5gb-7d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 7,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-10gb-7d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 10,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-unl-7d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 7,
+      "priceUSD": 21,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-unl-10d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 10,
+      "priceUSD": 31,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-5gb-15d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 7.5,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-10gb-15d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 10.5,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-20gb-15d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 15,
+      "priceUSD": 17.5,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-unl-15d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 15,
+      "priceUSD": 39,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-5gb-30d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 8,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-10gb-30d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 11,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-20gb-30d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 18,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-50gb-30d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": 50,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 27.5,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "airalo-thailand-unl-30d",
+      "provider": "airalo",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 30,
+      "priceUSD": 49,
+      "networks": [
+        "dtac"
+      ],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-unl-5d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 5,
+      "priceUSD": 14.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-1gb-7d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": 1,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 7,
+      "priceUSD": 2.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-unl-7d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 7,
+      "priceUSD": 20.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-unl-10d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 10,
+      "priceUSD": 30.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-unl-15d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 15,
+      "priceUSD": 38.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-unl-20d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 20,
+      "priceUSD": 43.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-unl-25d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 25,
+      "priceUSD": 47.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-3gb-30d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": 3,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 5.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-5gb-30d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": 5,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 7.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-10gb-30d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": 10,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 10.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-20gb-30d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": 20,
+      "unlimited": false,
+      "dailyHighSpeedGB": null,
+      "throttle": null,
+      "days": 30,
+      "priceUSD": 19.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    },
+    {
+      "id": "saily-thailand-unl-30d",
+      "provider": "saily",
+      "country": "thailand",
+      "dataGB": null,
+      "unlimited": true,
+      "dailyHighSpeedGB": 5,
+      "throttle": "1 Mbps",
+      "days": 30,
+      "priceUSD": 48.99,
+      "networks": [],
+      "checkedAt": "2026-10-29",
+      "verified": true,
+      "affiliateUrl": null
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import AreaCard from '../../../components/AreaCard.astro';
+import PartnerLink from '../../../components/PartnerLink.astro';
+import { allCities, esimPath, type City, type Country } from '../../../lib/destinations';
+import { agodaHotels, tripcomHotels } from '../../../lib/affiliate';
+import { PROVIDERS, cheapestFor, planLabel, planUrl, plansFor, toTWD } from '../../../lib/esim';
+import { breadcrumbLd } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return allCities().map(({ country, city }) => ({
+    params: { country: country.slug, city: city.slug },
+    props: { country, city },
+  }));
+}
+
+interface Props {
+  country: Country;
+  city: City;
+}
+
+const { country, city } = Astro.props;
+
+// 依出現次數排序的標籤，給篩選用
+const tagCount = new Map<string, number>();
+city.areas.forEach((a) => a.goodFor.forEach((t) => tagCount.set(t, (tagCount.get(t) ?? 0) + 1)));
+// 只留至少兩區共有的標籤，避免篩選鈕太多
+const tags = [...tagCount.entries()].filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1]).map(([t]) => t);
+
+// 速查表：常見需求 → 推薦區域
+const quick = ['第一次去', '預算有限', '交通方便', '逛街夜生活']
+  .map((tag) => ({ tag, areas: city.areas.filter((a) => a.goodFor.includes(tag)) }))
+  .filter((q) => q.areas.length > 0);
+
+// 交叉導購：這個國家的 eSIM
+const esimPlans = plansFor(country.slug);
+const esimPicks = [
+  { label: '5 天・每天 1GB', plan: cheapestFor(esimPlans, 5, 1) },
+  { label: '5 天・吃到飽', plan: cheapestFor(esimPlans, 5, null) },
+].filter((p) => p.plan);
+
+const crumbs = [
+  { name: '首頁', href: '/' },
+  { name: '住哪區', href: '/hotels/' },
+  { name: `${city.name}住宿`, href: Astro.url.pathname },
+];
+
+const title = `${city.name}住哪區？${city.areas.length} 個區域優缺點與交通比較`;
+const description = `${city.name}住宿區域推薦：${city.areas.map((a) => a.name).join('、')}，各區適合誰、交通與注意事項，一鍵比較 Trip.com、Agoda、Booking.com 房價。`;
+---
+
+<Base title={title} description={description} jsonLd={[breadcrumbLd(crumbs, Astro.site)]}>
+  <div class="mx-auto max-w-3xl px-4 pt-6">
+    <Breadcrumb items={crumbs} />
+
+    <header class="rise mt-5">
+      <p class="text-xs font-semibold tracking-[0.25em] text-stamp">
+        {country.flag} STAY · {city.slug.toUpperCase()}
+      </p>
+      <h1 class="mt-2 text-3xl font-bold leading-tight sm:text-4xl">{city.name}住哪區？</h1>
+      <p class="mt-3 leading-relaxed text-ink-soft">{city.intro}</p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        <PartnerLink href={tripcomHotels(city.tripcomCityId)} partner="tripcom" variant="ink" placement="city-hero">
+          Trip.com 看全部{city.name}飯店
+        </PartnerLink>
+        <PartnerLink href={agodaHotels(city.agodaCityId)} partner="agoda" placement="city-hero">
+          Agoda 比價
+        </PartnerLink>
+      </div>
+    </header>
+
+    {quick.length > 0 && (
+      <section class="rise mt-8" style="animation-delay: 80ms">
+        <h2 class="sr-only">速查</h2>
+        <dl class="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4">
+          {quick.map((q) => (
+            <div class="bg-card px-3.5 py-3">
+              <dt class="text-[11px] text-ink-soft">{q.tag}</dt>
+              <dd class="mt-0.5 font-display text-base font-bold leading-snug">
+                {q.areas.map((a, i) => (
+                  <>
+                    {i > 0 && '・'}
+                    <a href={`#${a.slug}`} class="hover:text-stamp">{a.name}</a>
+                  </>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+
+    <section class="area-list mt-10">
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-label="依需求篩選區域">
+        <button type="button" class="chip" data-tag="" aria-pressed="true">全部</button>
+        {tags.map((t) => (
+          <button type="button" class="chip" data-tag={t} aria-pressed="false">{t}</button>
+        ))}
+      </div>
+      <div class="mt-5 space-y-4">
+        {city.areas.map((area, i) => <AreaCard area={area} city={city} index={i} />)}
+      </div>
+      <p class="mt-3 text-[11px] text-ink-soft">
+        按鈕為合作連結，你的訂房價格不變，本站可能獲得分潤。<a href="/disclosure/" class="underline">揭露說明</a>
+      </p>
+    </section>
+
+    {esimPicks.length > 0 && (
+      <section class="mt-14 rounded-2xl bg-ink px-5 py-6 text-paper">
+        <p class="text-xs font-semibold tracking-[0.25em] text-sun">ESIM · {country.name}</p>
+        <h2 class="mt-1 text-2xl font-bold">住的搞定了，網路呢？</h2>
+        <ul class="mt-4 space-y-2">
+          {esimPicks.map(({ label, plan }) => (
+            <li class="flex items-center justify-between gap-3 rounded-lg bg-paper/5 px-3.5 py-2.5">
+              <span class="text-sm">
+                <span class="block text-[11px] text-paper/60">{label}最省</span>
+                {PROVIDERS[plan!.provider].name} {planLabel(plan!)}
+              </span>
+              <a
+                href={planUrl(plan!)}
+                target="_blank"
+                rel="sponsored nofollow noopener"
+                data-partner={plan!.provider}
+                data-placement="city-esim"
+                class="num shrink-0 rounded-md bg-paper px-3 py-1.5 text-sm font-semibold text-ink transition hover:bg-sun"
+              >
+                NT${toTWD(plan!.priceUSD)} ↗
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={esimPath(country)} class="mt-4 inline-block text-sm font-semibold text-sun hover:underline">
+          比較全部{country.name} eSIM →
+        </a>
+      </section>
+    )}
+  </div>
+</Base>
+
+<script>
+  // 依需求標籤篩選區域卡
+  document.querySelectorAll<HTMLElement>('.area-list').forEach((root) => {
+    const cards = [...root.querySelectorAll<HTMLElement>('.area-card')];
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('[data-tag]')];
+    root.addEventListener('click', (e) => {
+      const chip = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-tag]');
+      if (!chip) return;
+      const tag = chip.dataset.tag!;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      cards.forEach((card) => {
+        card.hidden = tag !== '' && !card.dataset.tags!.split('|').includes(tag);
+      });
+    });
+  });
+</script>

@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { COUNTRIES, hotelsPath } from '../../lib/destinations';
+import { breadcrumbLd } from '../../lib/seo';
+
+const crumbs = [
+  { name: '首頁', href: '/' },
+  { name: '住哪區', href: '/hotels/' },
+];
+---
+
+<Base
+  title="住哪區：熱門城市住宿區域推薦"
+  description="東京、大阪、首爾、曼谷住哪區？各區適合誰、交通與注意事項整理，再一鍵比較 Trip.com、Agoda 房價。"
+  jsonLd={[breadcrumbLd(crumbs, Astro.site)]}
+>
+  <div class="mx-auto max-w-3xl px-4 pt-6">
+    <Breadcrumb items={crumbs} />
+    <header class="rise mt-5">
+      <p class="text-xs font-semibold tracking-[0.25em] text-stamp">STAY · WHERE</p>
+      <h1 class="mt-2 text-3xl font-bold sm:text-4xl">先選對區，再挑飯店</h1>
+      <p class="mt-3 text-ink-soft">同樣的預算，住對區域每天省下一小時通勤。</p>
+    </header>
+
+    {COUNTRIES.map((country, ci) => (
+      <section class="rise mt-10" style={`animation-delay: ${80 + ci * 60}ms`}>
+        <h2 class="flex items-center gap-2 text-sm font-semibold tracking-[0.2em] text-ink-soft">
+          <span aria-hidden="true">{country.flag}</span>{country.name}
+        </h2>
+        <div class="mt-3 grid gap-3 sm:grid-cols-2">
+          {country.cities.map((city) => (
+            <a href={hotelsPath(country, city)} class="ticket group block px-5 py-4 transition hover:-translate-y-0.5">
+              <span class="flex items-center justify-between">
+                <span class="font-display text-2xl font-bold">{city.name}</span>
+                <span class="text-stamp transition group-hover:translate-x-1" aria-hidden="true">→</span>
+              </span>
+              <span class="mt-1 block text-xs text-ink-soft">{city.areas.map((a) => a.name).join('・')}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</Base>

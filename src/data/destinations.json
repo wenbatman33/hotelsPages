@@ -1,0 +1,343 @@
+{
+  "_note": "國家 / 城市 / 住宿區域。tripcomCityId 與 agodaCityId 已於 2026-10-29 開啟網址確認對應城市；新增城市時務必實際開網址確認，不要猜。tier：budget 平價 / mid 中價 / high 高價。 picks：編輯推薦飯店，格式見 CLAUDE.md「編輯推薦飯店」。",
+  "countries": [
+    {
+      "slug": "japan",
+      "name": "日本",
+      "flag": "🇯🇵",
+      "cities": [
+        {
+          "slug": "tokyo",
+          "name": "東京",
+          "tripcomCityId": 228,
+          "agodaCityId": 5085,
+          "intro": "東京很大，住錯區每天會多花一小時在通勤。先想好從成田還是羽田進出、主要想逛東邊（淺草、上野）還是西邊（新宿、澀谷），再挑區域。",
+          "areas": [
+            {
+              "slug": "shinjuku",
+              "name": "新宿",
+              "bookingQuery": "新宿, 東京",
+              "tiers": [
+                "mid",
+                "high"
+              ],
+              "goodFor": [
+                "第一次去",
+                "交通方便",
+                "逛街夜生活"
+              ],
+              "why": "JR、地鐵、私鐵在此交會，往河口湖、箱根的巴士也從這裡出發，去哪都不用轉太多次。",
+              "watch": "車站非常大、出口多，第一次容易迷路；歌舞伎町一帶晚上較雜，選南口或西口的飯店較安靜。",
+              "picks": []
+            },
+            {
+              "slug": "ueno",
+              "name": "上野",
+              "bookingQuery": "上野, 東京",
+              "tiers": [
+                "budget",
+                "mid"
+              ],
+              "goodFor": [
+                "成田進出",
+                "預算有限",
+                "親子"
+              ],
+              "why": "京成 Skyliner 直達成田機場，約 40 分鐘；上野公園、動物園、阿美橫町都在步行範圍。",
+              "watch": "到新宿、澀谷要搭山手線約 25–30 分鐘，主要行程在西邊的話不划算。",
+              "picks": []
+            },
+            {
+              "slug": "asakusa",
+              "name": "淺草",
+              "bookingQuery": "淺草, 東京",
+              "tiers": [
+                "budget"
+              ],
+              "goodFor": [
+                "預算有限",
+                "傳統氛圍",
+                "機場直通"
+              ],
+              "why": "都營淺草線有班次直通成田與羽田，青旅與平價旅館多，晚上散步到隅田川看晴空塔夜景。",
+              "watch": "店家打烊早，晚上較安靜；離西邊商圈遠。",
+              "picks": []
+            },
+            {
+              "slug": "ginza-tokyo-station",
+              "name": "銀座・東京站",
+              "bookingQuery": "東京站, 東京",
+              "tiers": [
+                "mid",
+                "high"
+              ],
+              "goodFor": [
+                "搭新幹線",
+                "購物",
+                "商務"
+              ],
+              "why": "東京站是新幹線起點，要順遊京都、大阪或輕井澤最方便；成田特快 N'EX 也停這裡。",
+              "watch": "房價偏高，週末晚上辦公區人少、餐廳選擇變少。",
+              "picks": []
+            },
+            {
+              "slug": "shibuya",
+              "name": "澀谷",
+              "bookingQuery": "澀谷, 東京",
+              "tiers": [
+                "mid",
+                "high"
+              ],
+              "goodFor": [
+                "逛街夜生活",
+                "年輕潮流"
+              ],
+              "why": "十字路口、新商場與原宿、表參道都在附近，晚上也很熱鬧。",
+              "watch": "人潮多、房價高；往成田要轉車，拖大行李較累。",
+              "picks": []
+            }
+          ]
+        },
+        {
+          "slug": "osaka",
+          "name": "大阪",
+          "tripcomCityId": 219,
+          "agodaCityId": 9590,
+          "intro": "大阪市區不大，住在御堂筋線沿線（梅田到難波）幾乎都方便。若要常跑京都、神戶，選梅田；想從關西機場直達、晚上吃喝逛街，選難波。",
+          "areas": [
+            {
+              "slug": "namba",
+              "name": "難波・心齋橋",
+              "bookingQuery": "難波, 大阪",
+              "tiers": [
+                "budget",
+                "mid"
+              ],
+              "goodFor": [
+                "第一次去",
+                "美食購物",
+                "關西機場進出"
+              ],
+              "why": "南海電鐵 Rapi:t 直達關西機場約 35–40 分鐘；道頓堀、黑門市場、心齋橋商店街步行可到。",
+              "watch": "觀光客多、晚上熱鬧，怕吵選離道頓堀遠一點的巷子。",
+              "picks": []
+            },
+            {
+              "slug": "umeda",
+              "name": "梅田・大阪站",
+              "bookingQuery": "梅田, 大阪",
+              "tiers": [
+                "mid",
+                "high"
+              ],
+              "goodFor": [
+                "跑京都神戶",
+                "搭新幹線",
+                "百貨購物"
+              ],
+              "why": "JR 大阪站搭新快速到京都約 30 分鐘、到神戶約 20 分鐘，到新大阪搭新幹線只要一站。",
+              "watch": "站體與地下街非常複雜，房價也比難波高一些。",
+              "picks": []
+            },
+            {
+              "slug": "hommachi",
+              "name": "本町・淀屋橋",
+              "bookingQuery": "本町, 大阪",
+              "tiers": [
+                "budget",
+                "mid"
+              ],
+              "goodFor": [
+                "性價比",
+                "兩頭跑"
+              ],
+              "why": "位在御堂筋線中段，到梅田、難波都只要幾站；商務飯店多，同價位房間通常較新較大。",
+              "watch": "辦公區晚上與週末較冷清，吃飯要往難波或梅田走。",
+              "picks": []
+            },
+            {
+              "slug": "tennoji",
+              "name": "天王寺",
+              "bookingQuery": "天王寺, 大阪",
+              "tiers": [
+                "budget"
+              ],
+              "goodFor": [
+                "預算有限",
+                "關西機場進出",
+                "親子"
+              ],
+              "why": "JR Haruka 與關空快速都停天王寺；阿倍野 Harukas、天王寺動物園就在旁邊。",
+              "watch": "相鄰的新今宮一帶部分街區夜間較雜，選大馬路旁或天王寺站周邊的飯店。",
+              "picks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "south-korea",
+      "name": "韓國",
+      "flag": "🇰🇷",
+      "cities": [
+        {
+          "slug": "seoul",
+          "name": "首爾",
+          "tripcomCityId": 274,
+          "agodaCityId": 14690,
+          "intro": "多數景點在漢江北邊（江北），第一次去住明洞、弘大、首爾站一帶最方便。從仁川機場搭機場鐵道 AREX 可直達弘大與首爾站。",
+          "areas": [
+            {
+              "slug": "myeongdong",
+              "name": "明洞",
+              "bookingQuery": "明洞, 首爾",
+              "tiers": [
+                "mid"
+              ],
+              "goodFor": [
+                "第一次去",
+                "購物美妝",
+                "機場巴士直達"
+              ],
+              "why": "美妝街、換錢所、小吃攤集中，機場巴士直達；到景福宮、南山塔都近。",
+              "watch": "觀光客多，房價偏高，房間普遍較小。",
+              "picks": []
+            },
+            {
+              "slug": "hongdae",
+              "name": "弘大",
+              "bookingQuery": "弘大, 首爾",
+              "tiers": [
+                "budget",
+                "mid"
+              ],
+              "goodFor": [
+                "預算有限",
+                "逛街夜生活",
+                "機場直達"
+              ],
+              "why": "AREX 一般列車直達仁川機場；年輕人商圈，平價住宿、咖啡廳、街頭表演多。",
+              "watch": "週末夜晚吵；到江南要搭地鐵 40 分鐘以上。",
+              "picks": []
+            },
+            {
+              "slug": "seoul-station",
+              "name": "首爾站",
+              "bookingQuery": "首爾站, 首爾",
+              "tiers": [
+                "mid"
+              ],
+              "goodFor": [
+                "跑釜山",
+                "機場直達",
+                "交通方便"
+              ],
+              "why": "AREX 直達列車直通仁川機場，KTX 往釜山也從這裡出發，適合多城市行程。",
+              "watch": "站前以辦公與交通為主，逛街要搭車到明洞或弘大。",
+              "picks": []
+            },
+            {
+              "slug": "dongdaemun",
+              "name": "東大門",
+              "bookingQuery": "東大門, 首爾",
+              "tiers": [
+                "budget",
+                "mid"
+              ],
+              "goodFor": [
+                "預算有限",
+                "深夜購物"
+              ],
+              "why": "多條地鐵線交會，批發商場營業到深夜；同價位房間通常比明洞大。",
+              "watch": "部分巷弄較雜亂，晚上回飯店走大路。",
+              "picks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "thailand",
+      "name": "泰國",
+      "flag": "🇹🇭",
+      "cities": [
+        {
+          "slug": "bangkok",
+          "name": "曼谷",
+          "tripcomCityId": 359,
+          "agodaCityId": 9395,
+          "intro": "曼谷塞車嚴重，住在 BTS 空鐵或 MRT 地鐵站步行範圍內最重要。購物選暹羅，吃喝選素坤逸，要景觀與高級飯店選河岸。",
+          "areas": [
+            {
+              "slug": "siam",
+              "name": "暹羅",
+              "bookingQuery": "暹羅, 曼谷",
+              "tiers": [
+                "mid",
+                "high"
+              ],
+              "goodFor": [
+                "第一次去",
+                "購物",
+                "交通方便"
+              ],
+              "why": "BTS 兩條線在暹羅站交會，大型商場一字排開；從機場快線 Phaya Thai 站轉 BTS 即可到。",
+              "watch": "房價較高，晚上商場關門後周邊選擇變少。",
+              "picks": []
+            },
+            {
+              "slug": "sukhumvit",
+              "name": "素坤逸（Asok・Phrom Phong）",
+              "bookingQuery": "Sukhumvit, Bangkok",
+              "tiers": [
+                "budget",
+                "mid",
+                "high"
+              ],
+              "goodFor": [
+                "選擇最多",
+                "美食",
+                "交通方便"
+              ],
+              "why": "BTS 素坤逸線貫穿，Asok 站可轉 MRT；餐廳、按摩、百貨密集，各種價位都有。",
+              "watch": "Nana 站一帶夜生活區較雜，親子旅客可選 Phrom Phong 周邊。",
+              "picks": []
+            },
+            {
+              "slug": "ratchada",
+              "name": "拉差達・拉瑪九",
+              "bookingQuery": "Ratchada, Bangkok",
+              "tiers": [
+                "budget"
+              ],
+              "goodFor": [
+                "預算有限",
+                "夜市"
+              ],
+              "why": "MRT 沿線，夜市與在地餐廳多，同價位房間比暹羅、素坤逸大又新。",
+              "watch": "去 BTS 商圈要轉乘，觀光景點較遠。",
+              "picks": []
+            },
+            {
+              "slug": "riverside",
+              "name": "河岸區",
+              "bookingQuery": "Riverside, Bangkok",
+              "tiers": [
+                "mid",
+                "high"
+              ],
+              "goodFor": [
+                "蜜月",
+                "景觀",
+                "看寺廟"
+              ],
+              "why": "湄南河景觀飯店集中，搭昭披耶河船可到大皇宮、鄭王廟。",
+              "watch": "BTS 只到 Saphan Taksin 站，很多飯店要靠接駁船，行動較不自由。",
+              "picks": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
