@@ -1,6 +1,7 @@
-// 站名與共用設定；品牌名稱先用暫定名，確定後只改這裡
+// 站名與共用設定（2026-10-29 定名「出國吧」，網域 chuguoba.tw）
 export const SITE = {
-  name: '旅算',
+  name: '出國吧',
+  nameEn: 'ChuGuoBa',
   tagline: '把錢花在旅行上，不是花在比價上',
   locale: 'zh-TW',
 };

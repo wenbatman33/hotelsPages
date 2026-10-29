@@ -77,9 +77,12 @@ const nav = [
   </head>
   <body class="min-h-dvh">
     <header class="border-b border-ink/10">
-      <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
-        <a href="/" class="flex items-baseline gap-2">
-          <span class="font-display text-2xl font-bold">{SITE.name}</span>
+      <div class="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
+        <a href="/" class="flex shrink-0 items-center gap-3" aria-label={`${SITE.name} ${SITE.nameEn}`}>
+          <span class="flex flex-col leading-none">
+            <span class="whitespace-nowrap font-display text-2xl font-bold">{SITE.name}</span>
+            <span class="num mt-1 text-[10px] font-semibold tracking-[0.18em] text-stamp">{SITE.nameEn}</span>
+          </span>
           <span class="hidden text-xs text-ink-soft sm:inline">{SITE.tagline}</span>
         </a>
         <nav class="flex items-center gap-1 text-sm">
@@ -87,7 +90,7 @@ const nav = [
             <a
               href={item.href}
               class:list={[
-                'rounded-md px-2.5 py-1.5 transition hover:bg-ink/5',
+                'whitespace-nowrap rounded-md px-2 py-1.5 transition hover:bg-ink/5 sm:px-2.5',
                 path.startsWith(item.href) && 'bg-ink text-paper hover:bg-ink',
               ]}
             >
@@ -109,7 +112,7 @@ const nav = [
           價格為人工查核或平台觀測的參考值，實際以訂購頁面為準。
           <a href="/disclosure/" class="underline underline-offset-2 hover:text-ink">資料來源與合作揭露</a>
         </p>
-        <p>© {new Date().getFullYear()} {SITE.name}</p>
+        <p>© {new Date().getFullYear()} {SITE.name} {SITE.nameEn}</p>
       </div>
     </footer>
   </body>

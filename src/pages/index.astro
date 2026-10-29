@@ -8,6 +8,16 @@ const minEsim = toTWD(Math.min(...PLANS.map((p) => p.priceUSD)));
 const cityCount = allCities().length;
 const areaCount = allCities().reduce((n, { city }) => n + city.areas.length, 0);
 
+// 網站結構化資料：讓搜尋引擎知道中英文站名
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.name,
+  alternateName: SITE.nameEn,
+  url: new URL('/', Astro.site).toString(),
+  inLanguage: 'zh-TW',
+};
+
 const rows = COUNTRIES.map((country) => {
   const plans = plansFor(country.slug);
   const unl5 = cheapestFor(plans, 5, null);
@@ -15,7 +25,7 @@ const rows = COUNTRIES.map((country) => {
 });
 ---
 
-<Base title={SITE.name} description="出國前兩件事一次搞定：各城市住哪區最方便、eSIM 哪家最便宜。日本、韓國、泰國價格人工查核，一鍵比價。">
+<Base title={SITE.name} jsonLd={[websiteLd]} description="出國前兩件事一次搞定：各城市住哪區最方便、eSIM 哪家最便宜。日本、韓國、泰國價格人工查核，一鍵比價。">
   <section class="mx-auto max-w-5xl px-4 pt-10 sm:pt-16">
     <p class="rise text-xs font-semibold tracking-[0.3em] text-stamp">BEFORE YOU FLY</p>
     <h1 class="rise mt-3 max-w-2xl text-4xl font-bold leading-[1.15] sm:text-6xl" style="animation-delay: 60ms">

@@ -42,6 +42,7 @@
 - 所有聯盟連結加 `rel="sponsored nofollow noopener"`，並在連結旁標示「合作連結」
 
 ## 部署與 SEO
+- 站名「出國吧」（`src/config.ts`），預定正式網域 `chuguoba.tw`（台灣註冊商購買，NS 指向 Cloudflare 後綁成 Worker 自訂網域）
 - 部署在 Cloudflare Workers（靜態資源），網址 https://hotelspages.wenbatman33.workers.dev ，push 到 main 自動部署
 - `wrangler.jsonc` 的 `name` 必須與後台 Worker 名稱 `hotelspages` 一致；404 靠 `not_found_handling: "404-page"`
 - 所有變數（`SITE_URL`、聯盟 ID、`GA_MEASUREMENT_ID`、`GOOGLE_SITE_VERIFICATION`）都在建置時寫進頁面，必須設在 Cloudflare 的「建置變數」，改完要重新部署
